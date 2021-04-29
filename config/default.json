@@ -1,0 +1,12 @@
+{
+  "db": {
+    "uri": "mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getircase-study?retryWrites=true",
+    "username": "challengeUser",
+    "password": "WUMglwNBaydH8Yvu",
+    "databaseName": "getircase-study"
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379
+  }
+}
