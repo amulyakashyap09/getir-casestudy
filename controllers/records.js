@@ -9,6 +9,12 @@ module.exports.fetchAllRecords = async (req, res, next) => {
   }
 };
 
+module.exports.welcome = async (req, res, next) => {
+  res.status(200).json({
+    title: "Welcome, to GETIR",
+  });
+};
+
 module.exports.filterRecords = async (req, res, next) => {
   try {
     const { startDate, endDate, minCount, maxCount } = req.body;
