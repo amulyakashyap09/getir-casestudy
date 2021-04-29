@@ -12,6 +12,8 @@ const findAll = async () => {
   } catch (error) {
     console.error(error);
     resp["error"] = error;
+  } finally {
+    return resp;
   }
 };
 
@@ -27,6 +29,8 @@ const aggregate = async (pipeline) => {
   } catch (error) {
     console.error(error);
     resp["error"] = error;
+  } finally {
+    return resp;
   }
 };
 

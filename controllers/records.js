@@ -3,9 +3,13 @@ const service = require("../services/records");
 module.exports.fetchAllRecords = async (req, res, next) => {
   try {
     const records = await service.findAll();
-    res.send(records);
+    if ("error" in records && records.error) {
+      res.status(400).json(records);
+    } else {
+      res.status(200).json(records.data);
+    }
   } catch (error) {
-    next(error);
+    res.status(500).json(error);
   }
 };
 
@@ -44,17 +48,21 @@ module.exports.filterRecords = async (req, res, next) => {
       },
     ];
     const records = await service.aggregate(pipelines);
-    const responseObj = {
-      code: 0,
-      msg: "Success",
-      records: records.map((obj) => ({
-        key: obj.key,
-        createdAt: obj.createdAt,
-        totalCount: obj.totalCount,
-      })),
-    };
-    res.send(responseObj);
+    if ("error" in records && records.error) {
+      res.status(400).json(records);
+    } else {
+      const responseObj = {
+        code: 0,
+        msg: "Success",
+        records: records.map((obj) => ({
+          key: obj.key,
+          createdAt: obj.createdAt,
+          totalCount: obj.totalCount,
+        })),
+      };
+      res.status(200).json(responseObj);
+    }
   } catch (error) {
-    next(error);
+    res.status(500).json(error);
   }
 };
