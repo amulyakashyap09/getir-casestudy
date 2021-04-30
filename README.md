@@ -1,6 +1,22 @@
 # getir-casestudy
 
-- ![#FF0000](https://via.placeholder.com/15/FF0000/000000?text=+) `Your GIVEN mongodb uri is not working and is throwing **user not allowed to perform any action** error.`
+- ![#FF0000](https://via.placeholder.com/15/FF0000/000000?text=+) ERROR IN CONNECTING TO MONGODB CLUSTER
+
+```Your GIVEN mongodb uri is not working and is throwing **user not allowed to perform any action** error.
+
+  ERROR:
+  {
+  "error": {
+  "ok": 0,
+  "code": 8000,
+  "codeName": "AtlasError",
+  "name": "MongoError"
+  }
+  }
+
+  MongoError: user is not allowed to do action [find]
+
+```
 
 - ![#228B22](https://via.placeholder.com/15/228B22/000000?text=+) So I have used local mongodb connection and given api to populate the stub and try the API
 
@@ -16,6 +32,11 @@
     - Database - getircase-study
     - Uri - mongodb://localhost:27017/getircase-study
     - Collection - records
+
+## COMMANDS :
+
+    - Start - npm start
+    - Test - npm test
 
 ## API
 
@@ -37,8 +58,9 @@
 ## MONGODB WORKING AGGREGATION QUERY
 
 ```
+
 db.getCollection('records').aggregate([{
-  $match: {
+$match: {
     $and: [
       {
         createdAt: { $lte: new Date("2018-01-26"), $gte: new Date("2016-01-26") },
@@ -48,17 +70,22 @@ db.getCollection('records').aggregate([{
 },{
   $group: {
     _id: "$key",
-    key: { $first: "$key" },
-    createdAt: { $first: "$createdAt" },
-    totalCount: {
-      $sum: 1,
-    },
-  },
+key: { $first: "$key" },
+createdAt: { $first: "$createdAt" },
+totalCount: {
+$sum: 1,
+},
+},
 },{
-  $match: { $and: [{ totalCount: { $gte: 100, $lte: 1000 } }] },
+$match: { $and: [{ totalCount: { $gte: 100, $lte: 1000 } }] },
 },])
+
 ```
 
 ### API TEST COVERAGE
 
 - We have used JEST and supertest to test our api and write few test cases.
+
+```
+
+```
