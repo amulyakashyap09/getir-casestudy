@@ -2,9 +2,6 @@ const config = require("config");
 const mongoose = require("mongoose");
 
 mongoose.connect(config.db.uri, {
-  auth: { authdb: config.db.databaseName },
-  user: config.db.username,
-  pass: config.db.password,
   useNewUrlParser: true,
   useCreateIndex: true,
 });

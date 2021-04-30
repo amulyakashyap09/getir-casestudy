@@ -3,7 +3,32 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "NODE_ENV=dev node ./bin/www",
+    "test": "NODE_ENV=dev jest --silent --coverage --detectOpenHandles"
+  },
+  "jest": {
+    "verbose": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov",
+      "json",
+      "text",
+      "html"
+    ],
+    "reporters": [
+      "default",
+      [
+        "./node_modules/jest-html-reporter",
+        {
+          "pageTitle": "API TEST COVERAGE",
+          "outputPath": "test-report/index.html",
+          "includingFailureMsg": true
+        }
+      ]
+    ]
   },
   "dependencies": {
     "@joi/date": "^2.1.0",
@@ -14,8 +39,15 @@
     "http-errors": "~1.6.3",
     "ioredis": "^4.27.1",
     "joi": "^17.4.0",
+    "moment": "^2.29.1",
     "mongoose": "^5.12.7",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "pug": "2.0.0-beta11",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "jest-html-reporter": "^3.3.0",
+    "supertest": "^6.1.3"
   }
 }

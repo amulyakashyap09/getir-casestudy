@@ -3,13 +3,12 @@ const { Schema } = mongoose;
 const RecordsSchema = new Schema(
   {
     key: String,
-    value: String,
-    createdAt: Date,
-    counts: [Number],
   },
   {
     timestamps: true,
   }
 );
+
+RecordsSchema.index({ key: 1 });
 
 module.exports = RecordsSchema;

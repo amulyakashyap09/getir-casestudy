@@ -1,0 +1,10 @@
+{
+  "db": {
+    "uri": "mongodb://localhost:27017/getircase-study",
+    "databaseName": "getircase-study"
+  },
+  "redis": {
+    "host": "127.0.0.1",
+    "port": 6379
+  }
+}

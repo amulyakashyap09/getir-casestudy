@@ -2,13 +2,13 @@ const recordModel = require("../models/record");
 
 /**
  * findAll finds all the record present in the collection
- * default skip limit 0, 10 respectively
+ * default skip limit 0, 100 respectively
  * @returns [{*}] records
  */
-const findAll = async () => {
+const findAll = async (skip = 0, limit = 100) => {
   const resp = {};
   try {
-    resp["data"] = await recordModel.find();
+    resp["data"] = await recordModel.find().skip(skip).limit(limit);
   } catch (error) {
     console.error(error);
     resp["error"] = error;
@@ -34,4 +34,10 @@ const aggregate = async (pipeline) => {
   }
 };
 
-module.exports = { findAll, aggregate };
+const bulkInsert = async (data = []) => {
+  if (data.length) {
+    await recordModel.insertMany(data);
+  }
+};
+
+module.exports = { findAll, aggregate, bulkInsert };
