@@ -19,7 +19,7 @@ module.exports.generateRecordApiValidation = (req, res, next) => {
   };
   const { error, value } = schema.validate(input);
   if (error) {
-    res.status(400).error({
+    res.status(400).json({
       error: error,
     });
   } else {
@@ -43,8 +43,8 @@ module.exports.filterRecordApiValidation = (req, res, next) => {
   });
   const { error, value } = schema.validate(req.body);
   if (error) {
-    res.status(400).error({
-      error: error,
+    res.status(400).json({
+      error: error.details[0].message,
     });
   } else {
     next();
