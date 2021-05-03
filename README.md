@@ -2,36 +2,46 @@
 
 ## Server :
 
-    - host: localhost
-    - port: 3000
+- host: https://getir-interview.herokuapp.com
 
 ## Database :
 
-    - Database - getircase-study
-    - Uri - mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getir-case-study?retryWrites=true
-    - Collection - records
+- Database - `getircase-study`
+- Uri - `mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getir-case-study?retryWrites=true`
+- Collection - `records`
 
 ## COMMANDS :
 
-    - Start - npm start
-    - Test - npm test
+- Start - `npm start`
+- Test - `npm test`
 
 ## API
 
-    ${host:port}/records?skip=0&limit=10000 - This api gives you records from the records collection based on skip limit u pass to query
+- GET `https://getir-interview.herokuapp.com/records?skip=0&limit=10000`
+- POST `https://getir-interview.herokuapp.com/filter-records`
 
-    ${host:port}/generate-records?startDate=2000-01-01&endDate=2021-04-30 - This api generates stub or mock data into the mongo db records collection based on the date in the query parameters
+  Payload Below:
 
-    ${host:port}/filter-records - This is real assignment api which filters the data and return based on the given payload
+  ```
+  {
+  "startDate": "2016-01-26",
+  "endDate": "2018-02-02",
+  "minCount": 2700,
+  "maxCount": 3000
+  }
+  ```
+
+- GET `https://getir-interview.herokuapp.com/coverage` - to view the code coverage
+- GET `https://getir-interview.herokuapp.com/test` - to view the tests
 
 ## Input Validation - Joi
 
-    - we have used Joi library to validate the given input as middleware
+- we have used Joi library to validate the given input as middleware
 
 ## Data Exchange Format -
 
-    - consumes = application/json
-    - produces = application/json
+- consumes = application/json
+- produces = application/json
 
 ## MONGODB WORKING AGGREGATION QUERY
 
@@ -77,6 +87,8 @@ records.aggregate([
 
 - We have used JEST and supertest to test our api and write few test cases.
 
-```
+### RUN LOCALLY
 
-```
+- `git clone git@github.com:amulyakashyap09/getir-casestudy.git`
+- `npm start`
+- use domain as `localhost:3000` to run api
