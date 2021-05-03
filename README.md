@@ -43,6 +43,11 @@
 - consumes = application/json
 - produces = application/json
 
+## SUGGESTIONS -
+
+- We can use redis to cache data for sometime if payload is same for request, it will help in performance optimisation
+- We can use swagger for the API Documentation
+
 ## MONGODB WORKING AGGREGATION QUERY
 
 ```
