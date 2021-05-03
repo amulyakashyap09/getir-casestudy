@@ -1,7 +1,7 @@
 const config = require("config");
 const mongoose = require("mongoose");
 
-describe("connect to the mongodb", async () => {
+describe("mongodb connection", async () => {
   it("should connect to mongodb successfully", async () => {
     const url = config.db.uri;
     const options = {
