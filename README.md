@@ -1,27 +1,5 @@
 # getir-casestudy
 
-- ![#FF0000](https://via.placeholder.com/15/FF0000/000000?text=+) ERROR IN CONNECTING TO MONGODB CLUSTER
-
-```Your GIVEN mongodb uri is not working and is throwing **user not allowed to perform any action** error.
-
-  ERROR:
-  {
-  "error": {
-  "ok": 0,
-  "code": 8000,
-  "codeName": "AtlasError",
-  "name": "MongoError"
-  }
-  }
-
-  MongoError: user is not allowed to do action [find]
-
-```
-
-- ![#228B22](https://via.placeholder.com/15/228B22/000000?text=+) So I have used local mongodb connection and given api to populate the stub and try the API
-
-- ![#FFFF00](https://via.placeholder.com/15/FFFF00/000000?text=+) VIDEO LINK FOR DEMO : [DEMO_VIDEO](https://drive.google.com/file/d/1y4tnZ0dOn4xMOU3g7jCsYWiEUCpVE7PD/view?usp=sharing)
-
 ## Server :
 
     - host: localhost
@@ -30,7 +8,7 @@
 ## Database :
 
     - Database - getircase-study
-    - Uri - mongodb://localhost:27017/getircase-study
+    - Uri - mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getir-case-study?retryWrites=true
     - Collection - records
 
 ## COMMANDS :
@@ -59,26 +37,39 @@
 
 ```
 
-db.getCollection('records').aggregate([{
-$match: {
-    $and: [
-      {
-        createdAt: { $lte: new Date("2018-01-26"), $gte: new Date("2016-01-26") },
-      },
-    ],
+records.aggregate([
+  {
+    '$match': {
+      '$and': [ {
+        createdAt: {
+          '$lte': 2018-02-02T00:00:00.000Z,
+          '$gte': 2016-01-26T00:00:00.000Z
+          }
+        }
+      ]
+    }
   },
-},{
-  $group: {
-    _id: "$key",
-key: { $first: "$key" },
-createdAt: { $first: "$createdAt" },
-totalCount: {
-$sum: 1,
-},
-},
-},{
-$match: { $and: [{ totalCount: { $gte: 100, $lte: 1000 } }] },
-},])
+  {
+    '$unwind': '$counts'
+  },
+  {
+    '$group': {
+      _id: '$_id',
+      key: { '$first': '$key' },
+      createdAt: { '$first': '$createdAt' },
+      totalCount: { '$sum': '$counts' }
+    }
+  },
+  {
+    '$match': {
+      '$and': [ {
+        totalCount: {
+          '$gte': 2700,
+          '$lte': 3000
+        }
+      }
+    ] }
+  }], {})
 
 ```
 

@@ -63,13 +63,14 @@ module.exports.filterRecords = async (req, res, next) => {
           ],
         },
       },
+      { $unwind: "$counts" },
       {
         $group: {
-          _id: "$key",
+          _id: "$_id",
           key: { $first: "$key" },
           createdAt: { $first: "$createdAt" },
           totalCount: {
-            $sum: 1,
+            $sum: "$counts",
           },
         },
       },

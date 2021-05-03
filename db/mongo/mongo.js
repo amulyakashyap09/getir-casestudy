@@ -1,9 +1,12 @@
 const config = require("config");
 const mongoose = require("mongoose");
 
+mongoose.set("debug", true);
+
 mongoose.connect(config.db.uri, {
   useNewUrlParser: true,
   useCreateIndex: true,
+  useUnifiedTopology: true,
 });
 
 mongoose.connection.on("open", () => {

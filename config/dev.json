@@ -1,10 +1,8 @@
 {
   "db": {
-    "uri": "mongodb://localhost:27017/getircase-study",
-    "databaseName": "getircase-study"
-  },
-  "redis": {
-    "host": "127.0.0.1",
-    "port": 6379
+    "uri": "mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getir-case-study?retryWrites=true",
+    "username": "challengeUser",
+    "password": "WUMglwNBaydH8Yvu",
+    "databaseName": "getir-case-study"
   }
 }
