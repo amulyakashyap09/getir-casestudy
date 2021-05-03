@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <title>GETIR</title>
+    <script type="text/css" href="./stylesheets/style.css"></script>
+  </head>
+
+  <body>
+    <h1>GETIR CASE STUDY ASSIGNMENT</h1>
+    <p>
+      You can view the test cases and code coverage by clicking on the links
+      below:
+    </p>
+    <ul>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://getir-interview.herokuapp.com/test"
+          >API TESTS</a
+        >
+      </li>
+      <li>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://getir-interview.herokuapp.com/test"
+          >CODE COVERAGE</a
+        >
+      </li>
+    </ul>
+
+    <h1 id="getir-casestudy">getir-casestudy</h1>
+    <h2 id="server">Server :</h2>
+    <ul>
+      <li>
+        HOST:
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://getir-interview.herokuapp.com/"
+          >https://getir-interview.herokuapp.com</a
+        >
+      </li>
+      <li>
+        GITHUB REPO:
+        <a
+          href="https://github.com/amulyakashyap09/getir-casestudy"
+          target="_blank"
+          rel="noopener noreferrer"
+          >https://github.com/amulyakashyap09/getir-casestudy</a
+        >
+      </li>
+    </ul>
+    <h2 id="database">Database :</h2>
+    <ul>
+      <li>Database - <code>getircase-study</code></li>
+      <li>
+        Uri -
+        <code
+          >mongodb+srv://challengeUser:WUMglwNBaydH8Yvu@challenge-xzwqd.mongodb.net/getir-case-study?retryWrites=true</code
+        >
+      </li>
+      <li>Collection - <code>records</code></li>
+    </ul>
+    <h2 id="commands">COMMANDS :</h2>
+    <ul>
+      <li>Start - <code>npm start</code></li>
+      <li>Test - <code>npm test</code></li>
+    </ul>
+    <h2 id="api">API</h2>
+    <ul>
+      <li>
+        GET
+        <code
+          >https://getir-interview.herokuapp.com/records?skip=0&amp;limit=10000</code
+        >
+      </li>
+      <li>
+        POST <code>https://getir-interview.herokuapp.com/filter-records</code>
+        <ul>
+          <code
+            >{ &quot;startDate&quot;: &quot;2016-01-26&quot;,
+            &quot;endDate&quot;: &quot;2018-02-02&quot;, &quot;minCount&quot;:
+            2700, &quot;maxCount&quot;: 3000 }</code
+          >
+        </ul>
+      </li>
+    </ul>
+    <ul>
+      <li>
+        GET
+        <code
+          ><a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://getir-interview.herokuapp.com/coverage"
+            >API COVERAGE</a
+          ></code
+        >
+        - to view the code coverage
+      </li>
+      <li>
+        GET
+        <code
+          ><a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://getir-interview.herokuapp.com/test"
+            >API TESTS</a
+          ></code
+        >
+        - to view the tests
+      </li>
+    </ul>
+    <h2 id="input-validation---joi">Input Validation - Joi</h2>
+    <ul>
+      <li>
+        we have used <bold>JOI</bold> library to validate the given input as
+        middleware
+      </li>
+    </ul>
+    <h2 id="data-exchange-format--">Data Exchange Format -</h2>
+    <ul>
+      <li>consumes = application/json</li>
+      <li>produces = application/json</li>
+    </ul>
+    <h2 id="mongodb-working-aggregation-query">
+      MONGODB WORKING AGGREGATION QUERY
+    </h2>
+    <pre><code>
+records.aggregate([
+  {
+    &#39;$match&#39;: {
+      &#39;$and&#39;: [ {
+        createdAt: {
+          &#39;$lte&#39;: 2018-02-02T00:00:00.000Z,
+          &#39;$gte&#39;: 2016-01-26T00:00:00.000Z
+          }
+        }
+      ]
+    }
+  },
+  {
+    &#39;$unwind&#39;: &#39;$counts&#39;
+  },
+  {
+    &#39;$group&#39;: {
+      _id: &#39;$_id&#39;,
+      key: { &#39;$first&#39;: &#39;$key&#39; },
+      createdAt: { &#39;$first&#39;: &#39;$createdAt&#39; },
+      totalCount: { &#39;$sum&#39;: &#39;$counts&#39; }
+    }
+  },
+  {
+    &#39;$match&#39;: {
+      &#39;$and&#39;: [ {
+        totalCount: {
+          &#39;$gte&#39;: 2700,
+          &#39;$lte&#39;: 3000
+        }
+      }
+    ] }
+  }], {})
+</code></pre>
+    <h3 id="api-test-coverage">API TEST COVERAGE</h3>
+    <ul>
+      <li>
+        We have used JEST and supertest to test our api and write few test
+        cases.
+      </li>
+    </ul>
+    <h3 id="run-locally">RUN LOCALLY</h3>
+    <ul>
+      <li>
+        <code
+          >git clone git@github.com:amulyakashyap09/getir-casestudy.git</code
+        >
+      </li>
+      <li><code>npm start</code></li>
+      <li>use domain as <code>localhost:3000</code> to run api</li>
+    </ul>
+  </body>
+</html>

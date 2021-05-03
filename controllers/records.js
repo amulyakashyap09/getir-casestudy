@@ -1,4 +1,5 @@
 const moment = require("moment");
+const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const service = require("../services/records");
 
@@ -45,9 +46,7 @@ module.exports.generateRecords = async (req, res, next) => {
 };
 
 module.exports.welcome = async (req, res, next) => {
-  res.status(200).json({
-    title: "Welcome, to GETIR",
-  });
+  res.sendFile(path.join(global.ROOT + "/index.html"));
 };
 
 module.exports.filterRecords = async (req, res, next) => {
